@@ -199,10 +199,17 @@
     <Compile Include="Migrations\201805030104599_InitialModel.Designer.cs">
       <DependentUpon>201805030104599_InitialModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\AitrDbContext\201805100155020_InitialDatabaseCreation.cs" />
+    <Compile Include="Migrations\AitrDbContext\201805100155020_InitialDatabaseCreation.Designer.cs">
+      <DependentUpon>201805100155020_InitialDatabaseCreation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\AitrDbContext\Configuration.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AitrDbContext.cs" />
     <Compile Include="Models\Answer.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Option.cs" />
     <Compile Include="Models\Question.cs" />
@@ -289,6 +296,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201805030104599_InitialModel.resx">
       <DependentUpon>201805030104599_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\AitrDbContext\201805100155020_InitialDatabaseCreation.resx">
+      <DependentUpon>201805100155020_InitialDatabaseCreation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

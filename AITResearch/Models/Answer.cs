@@ -1,26 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace AITResearch.Models
 {
+    [Table("Answer")]
     public class Answer
     {
         //Table primary key
         [Key]
-        [Column(TypeName = "Integer(10)")]
         public int AID { get; set; }
 
         //Table fields
-        [Column(TypeName = "Varchar(255)")]
+        [MaxLength(255)]
+        [Column(TypeName = "VARCHAR")]
         public string Text { get; set; }
 
         //Table foreign keys
+        [ForeignKey("Respondent")]
         public int Respondent_RID { get; set; }
+
+        [ForeignKey("Option")]
         public int? Option_OID { get; set; }
+
+        [ForeignKey("Question")]
         public int Question_QID { get; set; }
 
         //Table relationship
