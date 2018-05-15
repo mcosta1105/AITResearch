@@ -203,6 +203,10 @@
     <Compile Include="Migrations\AitrDbContext\201805100155020_InitialDatabaseCreation.Designer.cs">
       <DependentUpon>201805100155020_InitialDatabaseCreation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\AitrDbContext\201805150435519_PopulateStaffTable.cs" />
+    <Compile Include="Migrations\AitrDbContext\201805150435519_PopulateStaffTable.Designer.cs">
+      <DependentUpon>201805150435519_PopulateStaffTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AitrDbContext\Configuration.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -299,6 +303,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\AitrDbContext\201805100155020_InitialDatabaseCreation.resx">
       <DependentUpon>201805100155020_InitialDatabaseCreation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\AitrDbContext\201805150435519_PopulateStaffTable.resx">
+      <DependentUpon>201805150435519_PopulateStaffTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
