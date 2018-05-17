@@ -191,7 +191,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\SurveyController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -206,6 +209,10 @@
     <Compile Include="Migrations\AitrDbContext\201805150435519_PopulateStaffTable.cs" />
     <Compile Include="Migrations\AitrDbContext\201805150435519_PopulateStaffTable.Designer.cs">
       <DependentUpon>201805150435519_PopulateStaffTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\AitrDbContext\201805150821223_PopulateTypeTable.cs" />
+    <Compile Include="Migrations\AitrDbContext\201805150821223_PopulateTypeTable.Designer.cs">
+      <DependentUpon>201805150821223_PopulateTypeTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\AitrDbContext\Configuration.cs" />
     <Compile Include="Migrations\Configuration.cs" />
@@ -222,6 +229,8 @@
     <Compile Include="Models\Type.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\LoginFormViewModel.cs" />
+    <Compile Include="ViewModels\RegisterFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -257,8 +266,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -280,6 +287,9 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Register\Register.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Survey\Survey.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -306,6 +316,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\AitrDbContext\201805150435519_PopulateStaffTable.resx">
       <DependentUpon>201805150435519_PopulateStaffTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\AitrDbContext\201805150821223_PopulateTypeTable.resx">
+      <DependentUpon>201805150821223_PopulateTypeTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
