@@ -20,9 +20,7 @@
                 @Html.ActionLink("AITResearch", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    
-                </ul>
+                <ul class="nav navbar-nav"></ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
@@ -30,7 +28,7 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
+        <footer class="white-txt text-center">
             <p>&copy; @DateTime.Now.Year - AIT Research</p>
         </footer>
     </div>

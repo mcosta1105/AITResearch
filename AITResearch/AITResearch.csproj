@@ -190,6 +190,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -214,6 +215,10 @@
     <Compile Include="Migrations\AitrDbContext\201805150821223_PopulateTypeTable.Designer.cs">
       <DependentUpon>201805150821223_PopulateTypeTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\AitrDbContext\201805290328145_PopulateQuestionsTable.cs" />
+    <Compile Include="Migrations\AitrDbContext\201805290328145_PopulateQuestionsTable.Designer.cs">
+      <DependentUpon>201805290328145_PopulateQuestionsTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AitrDbContext\Configuration.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -231,6 +236,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\LoginFormViewModel.cs" />
     <Compile Include="ViewModels\RegisterFormViewModel.cs" />
+    <Compile Include="ViewModels\SurveyViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -290,6 +296,7 @@
     <Content Include="Views\Register\Register.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Survey\Survey.cshtml" />
+    <Content Include="Views\Admin\Admin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -319,6 +326,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\AitrDbContext\201805150821223_PopulateTypeTable.resx">
       <DependentUpon>201805150821223_PopulateTypeTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\AitrDbContext\201805290328145_PopulateQuestionsTable.resx">
+      <DependentUpon>201805290328145_PopulateQuestionsTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

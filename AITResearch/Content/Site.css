@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: #171819;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -21,4 +22,26 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+/*Boostrap Overrides*/
+
+.navbar-inverse {
+    background-color: transparent;
+    border-bottom-style: none;
+
+}
+
+.navbar-inverse .navbar-brand {
+    color: #ffffff;
+}
+
+.white-txt {
+    color: white;
+    font-family: sans-serif;
+}
+
+#container{
+    padding-top:100px;
+    padding-bottom: 100px;
 }

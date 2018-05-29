@@ -18,7 +18,7 @@ namespace AITResearch.Models
         public string Text { get; set; }
 
         
-        public int? Order { get; set; }
+        public int? QuestionOrder { get; set; }
 
         //Foreign Key
         [ForeignKey("Type")]
