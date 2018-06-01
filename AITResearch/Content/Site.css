@@ -27,9 +27,12 @@ textarea {
 /*Boostrap Overrides*/
 
 .navbar-inverse {
-    background-color: transparent;
+    background-color: #171819;
     border-bottom-style: none;
+}
 
+.container > .navbar-header {
+    background-color: #171819;
 }
 
 .navbar-inverse .navbar-brand {

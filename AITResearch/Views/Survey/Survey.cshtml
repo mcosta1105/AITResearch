@@ -3,18 +3,40 @@
 @{
     ViewBag.Title = "Survey";
 }
-<div>
-    <form>
-        <div class="form-group">
-            <p>Question goes here!</p>
+<div class="container">
+    <form method="post">
+        <div class="white-txt form-group">
+            <h3>@Model.Question.Text</h3>
         </div>
         <div>
-            <p>Question input goes here!</p>
+            @if (Model.Question.Type.Name == "text")
+            {
+                @Html.TextBoxFor(m => m.Answer.Text, new { @class = "form-control" })
+            }
+            else if (Model.Question.Type.Name == "radio")
+            {
+                foreach (var option in Model.Question.Options)
+                {
+                    <div class="radio">
+                        <label class="white-txt"><input type="radio" name="optradio" value="">@option.Value</label>
+                    </div>
+                }
+            }
+            else
+            {
+                foreach (var option in Model.Question.Options)
+                {
+                    <div class="checkbox">
+                        <label class="white-txt"><input type="checkbox" value="">@option.Value</label>
+                    </div>
+                }
+            }
         </div>
-        <div>
-            <button class="btn btn-primary">Next</button>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Next</button>
         </div>
     </form>
 </div>
+    
 
 

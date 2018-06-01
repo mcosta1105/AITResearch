@@ -1,7 +1,11 @@
-﻿namespace AITResearch.ViewModels
+﻿using AITResearch.Models;
+
+namespace AITResearch.ViewModels
 {
     public class SurveyViewModel
     {
-        public string Question { get; set; }
+        public Question Question { get; set; }
+
+        public Answer Answer { get; set; }
     }
 }
