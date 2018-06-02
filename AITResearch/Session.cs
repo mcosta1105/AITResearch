@@ -29,13 +29,28 @@ namespace AITResearch
 
         public static void AddFollowUpQuestion(int i)
         {
-
+            List<int> questions = GetFollowUpQuestions();
+            questions.Add(i);
+            SetFollowUpQuestions(questions);
         }
 
-        public static void SetFollowUpQuestion(List<int> followUpQuestions)
+        public static void RemoveFollowUpQuestion(int i)
+        {
+            List<int> questions = GetFollowUpQuestions();
+            questions.Remove(i);
+            SetFollowUpQuestions(questions);
+        }
+
+        public static void SetFollowUpQuestions(List<int> followUpQuestions)
         {
             HttpContext.Current.Session[FollowUp] = followUpQuestions;
-        }        
-       
+        }
+
+        public static List<int> GetFollowUpQuestions()
+        { 
+            return (List<int>)HttpContext.Current.Session[FollowUp];
+        }
+
+
     }
 }

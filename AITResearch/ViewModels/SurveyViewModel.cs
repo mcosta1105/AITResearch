@@ -1,4 +1,5 @@
 ﻿using AITResearch.Models;
+using System.Collections.Generic;
 
 namespace AITResearch.ViewModels
 {
@@ -7,5 +8,8 @@ namespace AITResearch.ViewModels
         public Question Question { get; set; }
 
         public Answer Answer { get; set; }
+
+        public List<CheckBoxViewModel> CheckBoxAnswers { get; set; }
+
     }
 }

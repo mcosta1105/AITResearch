@@ -17,17 +17,22 @@
             {
                 foreach (var option in Model.Question.Options)
                 {
+
                     <div class="radio">
-                        <label class="white-txt"><input type="radio" name="optradio" value="">@option.Value</label>
+                        @Html.RadioButtonFor(m => m.Answer.Option.OID, option.OID)
+                        @Html.Label(option.Value, new { @class = "white-txt" })
                     </div>
                 }
             }
             else
             {
-                foreach (var option in Model.Question.Options)
+                for (var i = 0; i < Model.Question.Options.Count; i++)
                 {
                     <div class="checkbox">
-                        <label class="white-txt"><input type="checkbox" value="">@option.Value</label>
+                        @Html.CheckBoxFor(m => m.CheckBoxAnswers[i].IsSelected)
+                        @Html.DisplayFor(m => m.Question.Options.ElementAt(i).Value, new { @class="white-txt"})
+                        @Html.HiddenFor(m => m.CheckBoxAnswers[i].Id, new { @Value = Model.Question.Options.ElementAt(i).OID })
+                        @Html.HiddenFor(m => m.CheckBoxAnswers[i].NextQuestion, new { @Value = Model.Question.Options.ElementAt(i).NextQuestion})
                     </div>
                 }
             }

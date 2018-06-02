@@ -21,11 +21,19 @@ namespace AITResearch.Controllers
         [HttpGet]
         public ActionResult Survey()
         {
+            var viewModel = new SurveyViewModel();
 
-            var viewModel = new SurveyViewModel
+            if (AppSession.GetFollowUpQuestions() == null)
             {
-                Question = GetQuestionByOrder(AppSession.GetQuestionNumber())
-            };
+                viewModel.Question = GetQuestionByOrder(7);
+                //viewModel.Question = GetQuestionByOrder(AppSession.GetQuestionNumber());
+            }
+            else
+            {
+                viewModel.Question = GetQuestionById(AppSession.GetFollowUpQuestions().First());
+            }
+            
+            
             return View(viewModel);
         }
 
@@ -33,7 +41,10 @@ namespace AITResearch.Controllers
         [HttpPost]
         public ActionResult Survey(SurveyViewModel model)
         {
-            AppSession.IncrementQuestionNumber();
+            if (model.Answer.Option.NextQuestion == null)
+            {
+                AppSession.IncrementQuestionNumber();
+            }            
 
             return RedirectToAction("Survey");
         }
