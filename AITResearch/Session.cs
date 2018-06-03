@@ -88,7 +88,11 @@ namespace AITResearch
         //Add answer to list and store in session
         public static void AddAnswer(Answer answer)
         {
-            List<Answer> answers = GetAnswers();
+            List<Answer> answers = new List<Answer>();
+            if(GetAnswers() != null)
+            {
+                answers = GetAnswers();
+            }
             answers.Add(answer);
             SetAnswers(answers);
         }

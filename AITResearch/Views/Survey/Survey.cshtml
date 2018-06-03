@@ -14,6 +14,7 @@
             @if (Model.Question.Type.Name == "text")
             {
                 @Html.TextBoxFor(m => m.Answer.Text, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Answer.Text, null, new { @class = "text-danger" })
             }
             else if (Model.Question.Type.Name == "radio")
             {
@@ -34,7 +35,7 @@
                         @Html.CheckBoxFor(m => m.CheckBoxAnswers[i].IsSelected)
                         @Html.Label(Model.Question.Options.ElementAt(i).Value, new { @class = "white-txt" })
                         @Html.HiddenFor(m => m.CheckBoxAnswers[i].Id, new { @Value = Model.Question.Options.ElementAt(i).OID })
-                        @Html.HiddenFor(m => m.CheckBoxAnswers[i].NextQuestion, new { @Value = Model.Question.Options.ElementAt(i).NextQuestion})
+                        @Html.HiddenFor(m => m.CheckBoxAnswers[i].NextQuestion, new { @Value = Model.Question.Options.ElementAt(i).NextQuestion })
                     </div>
                 }
             }

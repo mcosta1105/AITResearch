@@ -22,7 +22,7 @@ namespace AITResearch.Models
         public DateTime Date { get; set; }
 
         [Required]
-        [MaxLength(15)]
+        [MaxLength(45)]
         [Column(TypeName = "VARCHAR")]
         public string IP_Address { get; set; }
 

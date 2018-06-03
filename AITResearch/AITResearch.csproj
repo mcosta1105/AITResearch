@@ -228,6 +228,10 @@
     <Compile Include="Migrations\AitrDbContext\201806030622280_OverrideRespondentNotation.Designer.cs">
       <DependentUpon>201806030622280_OverrideRespondentNotation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\AitrDbContext\201806031409474_OverrideRespondentNotation1.cs" />
+    <Compile Include="Migrations\AitrDbContext\201806031409474_OverrideRespondentNotation1.Designer.cs">
+      <DependentUpon>201806031409474_OverrideRespondentNotation1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AitrDbContext\Configuration.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -347,6 +351,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\AitrDbContext\201806030622280_OverrideRespondentNotation.resx">
       <DependentUpon>201806030622280_OverrideRespondentNotation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\AitrDbContext\201806031409474_OverrideRespondentNotation1.resx">
+      <DependentUpon>201806031409474_OverrideRespondentNotation1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,5 +1,7 @@
 ﻿using AITResearch.Models;
 using AITResearch.ViewModels;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -36,6 +38,7 @@ namespace AITResearch.Controllers
                 }
                 else
                 {
+                    FinishSurvey();
                     return RedirectToAction("Finish", "Finish");
                 }
             }
@@ -60,8 +63,6 @@ namespace AITResearch.Controllers
             {
                 Question_QID = model.Answer.Question_QID                
             };
-
-
             if (model.Type == "checkbox")
             {
                 foreach (var option in model.CheckBoxAnswers)
@@ -69,7 +70,7 @@ namespace AITResearch.Controllers
                     if (option.IsSelected)
                     {
                         answer.Option_OID = option.Id;
-
+                        AppSession.AddAnswer(answer);
                         if (option.NextQuestion != null)
                         {
                             AppSession.AddFollowUpQuestion(option.NextQuestion.Value);
@@ -96,10 +97,16 @@ namespace AITResearch.Controllers
                     answer.Option_OID = model.Answer.Option_OID;
                     answer.Text = model.Answer.Text;
                     AppSession.IncrementQuestionNumber();
+                    AppSession.AddAnswer(answer);
                 }
             }
-            
-            
+
+
+
+
+
+
+
 
             return RedirectToAction("Survey");
         }
@@ -133,8 +140,48 @@ namespace AITResearch.Controllers
 
         public void FinishSurvey()
         {
+            Respondent respondent = AppSession.GetRespondent();
+            _context.Respondents.Add(respondent);
+            _context.SaveChanges();
 
+
+
+            if (AppSession.GetAnswers() != null)
+            {
+                try
+                {
+                    List<Answer> answers = AppSession.GetAnswers();
+
+                    foreach (var answer in answers)
+                    {
+                        answer.Respondent_RID = respondent.RID;
+                    }
+
+                    _context.Answers.AddRange(answers);
+                    _context.SaveChanges();
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
+           
+            
+            
         }
 
+        /*
+        private void ValidateModelState(SurveyViewModel model)
+        {
+            if(model.Type == "text")
+            {
+                if (model.Text == null)
+                {
+                    ModelState.AddModelError("Text", "Answer is required");
+                }
+            }
+
+        }
+        */
     }
 }

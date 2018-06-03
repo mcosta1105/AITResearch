@@ -21,8 +21,8 @@ namespace AITResearch.Controllers
             {
                 var respondent = new Respondent
                 {
-                    Date = DateTime.Now.Date,
-                    DoB = model.DoB.Date,
+                    Date = DateTime.Now,
+                    DoB = model.DoB,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     Phone = model.Phone,
