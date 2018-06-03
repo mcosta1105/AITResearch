@@ -11,5 +11,8 @@ namespace AITResearch.ViewModels
 
         public List<CheckBoxViewModel> CheckBoxAnswers { get; set; }
 
+        public string Type { get; set; }
+
+
     }
 }

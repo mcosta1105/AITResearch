@@ -5,10 +5,11 @@ namespace AITResearch
 {
     public class AppSession
     {
-        //Sessions
+        //Sessions name
         const string QuestionNumber = "QuestionNumber";
         const string FollowUp = "FollowUp";
         const string Respondent = "Respondent";
+        const string Answers = "Answer";
 
 
         public static int GetQuestionNumber()
@@ -31,14 +32,20 @@ namespace AITResearch
 
         public static void AddFollowUpQuestion(int i)
         {
-            List<int> questions = GetFollowUpQuestions();
+            List<int> questions = new List<int>();
+            if (GetFollowUpQuestions() != null)
+            {
+                questions = GetFollowUpQuestions();
+            }            
             questions.Add(i);
+
             SetFollowUpQuestions(questions);
         }
 
         public static void RemoveFollowUpQuestion(int i)
         {
-            List<int> questions = GetFollowUpQuestions();
+            List<int> questions = new List<int>();            
+            questions = GetFollowUpQuestions();
             questions.Remove(i);
             SetFollowUpQuestions(questions);
         }
@@ -64,6 +71,29 @@ namespace AITResearch
         {
             return (Respondent)HttpContext.Current.Session[Respondent];
         }
+
+
+        //Set answers in Session
+        public static void SetAnswers(List<Answer> answers)
+        {
+            HttpContext.Current.Session[Answers] = answers;
+        }
+
+        //Get answers stored in Session
+        public static List<Answer> GetAnswers()
+        {
+            return (List<Answer>)HttpContext.Current.Session[Answers];
+        }
+
+        //Add answer to list and store in session
+        public static void AddAnswer(Answer answer)
+        {
+            List<Answer> answers = GetAnswers();
+            answers.Add(answer);
+            SetAnswers(answers);
+        }
+
+
 
         //Cleans Session
         public static void ClearSession()

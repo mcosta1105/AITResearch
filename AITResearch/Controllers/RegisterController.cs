@@ -39,6 +39,22 @@ namespace AITResearch.Controllers
             return View();
         }
 
+        public ActionResult Anonymous()
+        {
+            Respondent respondent = new Respondent
+            {
+                Date = DateTime.Now.Date,
+                IP_Address = GetIpAddress(),
+                FirstName = "Anonymous",
+                LastName = "Anonymous"
+            };
+
+            AppSession.SetRespondent(respondent);
+
+            return RedirectToAction("Survey", "Survey");
+        }
+
+
         public string GetIpAddress()
         {
             //Get IP through PROXY

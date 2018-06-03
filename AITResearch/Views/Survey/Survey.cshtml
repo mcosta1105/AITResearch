@@ -7,6 +7,8 @@
     <form method="post">
         <div class="white-txt form-group">
             <h3>@Model.Question.Text</h3>
+            @Html.HiddenFor(m => m.Type, new { @Value = Model.Question.Type.Name})
+            @Html.HiddenFor(m => m.Answer.Question_QID, new { @Value = Model.Question.QID})
         </div>
         <div>
             @if (Model.Question.Type.Name == "text")
@@ -19,7 +21,7 @@
                 {
 
                     <div class="radio">
-                        @Html.RadioButtonFor(m => m.Answer.Option.OID, option.OID)
+                        @Html.RadioButtonFor(m => m.Answer.Option_OID, option.OID)
                         @Html.Label(option.Value, new { @class = "white-txt" })
                     </div>
                 }

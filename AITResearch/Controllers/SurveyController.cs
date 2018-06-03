@@ -21,17 +21,22 @@ namespace AITResearch.Controllers
         [HttpGet]
         public ActionResult Survey()
         {
-
+            
             var viewModel = new SurveyViewModel();
 
-            if (AppSession.GetFollowUpQuestions() == null)
+            //Verify if there is any followUp question in Session
+            if (AppSession.GetFollowUpQuestions() == null || AppSession.GetFollowUpQuestions().Count() == 0)
             {
-                //viewModel.Question = GetQuestionByOrder(7);
+                //Return question by Order
                 viewModel.Question = GetQuestionByOrder(AppSession.GetQuestionNumber());
             }
             else
-            {
+            {   
+                //Return question by option selected
                 viewModel.Question = GetQuestionById(AppSession.GetFollowUpQuestions().First());
+
+                //Remove question from FollowUp list
+                AppSession.RemoveFollowUpQuestion(viewModel.Question.QID);
             }
             
             
@@ -41,14 +46,52 @@ namespace AITResearch.Controllers
         
         [HttpPost]
         public ActionResult Survey(SurveyViewModel model)
-        {
-            if (model.Answer.Option.NextQuestion == null)
+        {   
+            var answer = new Answer
             {
+                Question_QID = model.Answer.Question_QID                
+            };
+
+
+            if (model.Type == "checkbox")
+            {
+                foreach (var option in model.CheckBoxAnswers)
+                {
+                    if (option.IsSelected)
+                    {
+                        answer.Option_OID = option.Id;
+
+                        if (option.NextQuestion != null)
+                        {
+                            AppSession.AddFollowUpQuestion(option.NextQuestion.Value);
+                        }
+                    }
+                }
+                if (AppSession.GetFollowUpQuestions() == null)
+                {
+                    AppSession.IncrementQuestionNumber();
+                }
+            }
+            
+            //Verify if user skipped question
+            if(model.Answer.Option_OID == null && model.Answer.Text == null)
+            {
+                //Skipped
                 AppSession.IncrementQuestionNumber();
-            }            
+            }
+            else
+            {
+                //Answered
+                answer.Option_OID = model.Answer.Option_OID;
+                answer.Text = model.Answer.Text;
+                AppSession.IncrementQuestionNumber();
+            }
 
             return RedirectToAction("Survey");
         }
+
+
+
 
         public Question GetQuestionById(int id)
         {

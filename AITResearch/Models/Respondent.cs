@@ -27,7 +27,7 @@ namespace AITResearch.Models
         public string IP_Address { get; set; }
 
         [Column(TypeName = "Date")]
-        public DateTime DoB { get; set; }
+        public DateTime? DoB { get; set; }
 
         [Required]
         [MaxLength(50)]
