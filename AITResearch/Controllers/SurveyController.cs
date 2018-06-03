@@ -12,7 +12,7 @@ namespace AITResearch.Controllers
         private AitrDbContext _context;
         
 
-
+        //Constructor
         public SurveyController()
         {
             _context = new AitrDbContext();
@@ -21,12 +21,13 @@ namespace AITResearch.Controllers
         [HttpGet]
         public ActionResult Survey()
         {
+
             var viewModel = new SurveyViewModel();
 
             if (AppSession.GetFollowUpQuestions() == null)
             {
-                viewModel.Question = GetQuestionByOrder(7);
-                //viewModel.Question = GetQuestionByOrder(AppSession.GetQuestionNumber());
+                //viewModel.Question = GetQuestionByOrder(7);
+                viewModel.Question = GetQuestionByOrder(AppSession.GetQuestionNumber());
             }
             else
             {

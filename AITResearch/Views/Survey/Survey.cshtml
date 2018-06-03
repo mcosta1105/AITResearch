@@ -30,7 +30,7 @@
                 {
                     <div class="checkbox">
                         @Html.CheckBoxFor(m => m.CheckBoxAnswers[i].IsSelected)
-                        @Html.DisplayFor(m => m.Question.Options.ElementAt(i).Value, new { @class="white-txt"})
+                        @Html.Label(Model.Question.Options.ElementAt(i).Value, new { @class = "white-txt" })
                         @Html.HiddenFor(m => m.CheckBoxAnswers[i].Id, new { @Value = Model.Question.Options.ElementAt(i).OID })
                         @Html.HiddenFor(m => m.CheckBoxAnswers[i].NextQuestion, new { @Value = Model.Question.Options.ElementAt(i).NextQuestion})
                     </div>

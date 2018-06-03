@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using AITResearch.Models;
+using System.Collections.Generic;
 using System.Web;
 namespace AITResearch
 {
@@ -7,6 +8,7 @@ namespace AITResearch
         //Sessions
         const string QuestionNumber = "QuestionNumber";
         const string FollowUp = "FollowUp";
+        const string Respondent = "Respondent";
 
 
         public static int GetQuestionNumber()
@@ -51,6 +53,22 @@ namespace AITResearch
             return (List<int>)HttpContext.Current.Session[FollowUp];
         }
 
+        //Store current respondent Id in Session
+        public static void SetRespondent(Respondent respondent)
+        {
+            HttpContext.Current.Session[Respondent] = respondent;
+        }
 
+        //Get current respondent in Session
+        public static Respondent GetRespondent()
+        {
+            return (Respondent)HttpContext.Current.Session[Respondent];
+        }
+
+        //Cleans Session
+        public static void ClearSession()
+        {
+            HttpContext.Current.Session.Clear();
+        }
     }
 }
