@@ -165,23 +165,10 @@ namespace AITResearch.Controllers
                     Console.WriteLine(e);
                 }
             }
-           
-            
+
+            AppSession.ClearSession();
             
         }
 
-        /*
-        private void ValidateModelState(SurveyViewModel model)
-        {
-            if(model.Type == "text")
-            {
-                if (model.Text == null)
-                {
-                    ModelState.AddModelError("Text", "Answer is required");
-                }
-            }
-
-        }
-        */
     }
 }
