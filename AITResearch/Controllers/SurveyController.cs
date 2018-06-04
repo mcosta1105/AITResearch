@@ -63,6 +63,7 @@ namespace AITResearch.Controllers
         [HttpPost]
         public ActionResult Survey(SurveyViewModel model)
         {   
+
             //Set question ID in answer from view model
             var answer = new Answer
             {
@@ -83,8 +84,12 @@ namespace AITResearch.Controllers
                         AppSession.AddAnswer(answer);
                         if (option.NextQuestion != null)
                         {
-                            //Add followUp question 
-                            AppSession.AddFollowUpQuestion(option.NextQuestion.Value);
+                            if (AppSession.GetFollowUpQuestions() == null || AppSession.GetFollowUpQuestions().All(id => id != option.NextQuestion))
+                            {
+                                //Add followUp question 
+                                AppSession.AddFollowUpQuestion(option.NextQuestion.Value);
+                            }
+                            
                         }
                     }
                 }
@@ -124,20 +129,38 @@ namespace AITResearch.Controllers
         //Get question by ID from DB
         public Question GetQuestionById(int id)
         {
-            var question = _context.Questions.Single(q => q.QID == id);
-            question.Options = _context.Options.Where(o => o.Question_QID == question.QID).ToList();
-            question.Type = _context.Types.Single(t => t.TID == question.Type_TID);
-                        
-            return question;
+            try
+            {
+                var question = _context.Questions.Single(q => q.QID == id);
+                question.Options = _context.Options.Where(o => o.Question_QID == question.QID).ToList();
+                question.Type = _context.Types.Single(t => t.TID == question.Type_TID);
+
+                return question;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+            
         }
 
         //Get quesiton by Order from DB
         public Question GetQuestionByOrder(int order)
         {
-            var question = _context.Questions.Single(q => q.QuestionOrder == order);
-            question.Options = _context.Options.Where(o => o.Question_QID == question.QID).ToList();
-            question.Type = _context.Types.Single(t => t.TID == question.Type_TID);
-            return question;
+            try
+            {
+                var question = _context.Questions.Single(q => q.QuestionOrder == order);
+                question.Options = _context.Options.Where(o => o.Question_QID == question.QID).ToList();
+                question.Type = _context.Types.Single(t => t.TID == question.Type_TID);
+                return question;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+            
            
         }
 
@@ -152,9 +175,19 @@ namespace AITResearch.Controllers
         {
             //get respondent from Session
             Respondent respondent = AppSession.GetRespondent();
-            //Store respondent in DB
-            _context.Respondents.Add(respondent);
-            _context.SaveChanges();
+            try
+            {
+                //Store respondent in DB
+                _context.Respondents.Add(respondent);
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e);
+            }
+            
+            
 
             //Questions answered
             if (AppSession.GetAnswers() != null)
