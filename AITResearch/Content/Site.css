@@ -48,3 +48,31 @@ textarea {
     padding-top:100px;
     padding-bottom: 100px;
 }
+
+.btn-primary {
+    margin-top:20px;
+    padding-right: 30px;
+    color: #ffffff;
+    background-color: rgba(255,255,255,0.2);
+    border-style: none;
+    padding-left: 30px;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    color: #171819;
+    background-color: #14afb2;
+    border-color: #14afb2;
+}
+
+footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align:center
+}
+
+#title{
+    margin-top: 50px;
+    font-size: 4em;
+}

@@ -17,18 +17,19 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("AITResearch", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a href="@Url.Action("Index", "Home")" class="navbar-brand">
+                    <img src="~/Content/Images/AITResearch_Logo.png" title="AITResearch" alt="AITResearch" />
+                </a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav"></ul>
-                @Html.Partial("_LoginPartial")
+                <a href="@Url.Action("Login", "Login")" class="btn btn-primary navbar-right">Login</a>
             </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer class="white-txt text-center">
+        <footer class="white-txt">
             <p>&copy; @DateTime.Now.Year - AIT Research</p>
         </footer>
     </div>
