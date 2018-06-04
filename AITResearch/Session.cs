@@ -12,6 +12,7 @@ namespace AITResearch
         const string Answers = "Answer";
 
 
+        //Get question by order number
         public static int GetQuestionNumber()
         {
             if (HttpContext.Current.Session[QuestionNumber] == null)
@@ -23,6 +24,7 @@ namespace AITResearch
             return (int)HttpContext.Current.Session[QuestionNumber];
         }
 
+        //Increment question order number
         public static void IncrementQuestionNumber()
         {
             int q = GetQuestionNumber();
@@ -30,6 +32,7 @@ namespace AITResearch
             HttpContext.Current.Session[QuestionNumber] = q;
         }        
 
+        //Add question to follow up List
         public static void AddFollowUpQuestion(int i)
         {
             List<int> questions = new List<int>();
@@ -42,6 +45,7 @@ namespace AITResearch
             SetFollowUpQuestions(questions);
         }
 
+        //Remove question from followUp List
         public static void RemoveFollowUpQuestion(int i)
         {
             List<int> questions = new List<int>();            
@@ -50,11 +54,13 @@ namespace AITResearch
             SetFollowUpQuestions(questions);
         }
 
+        //Set followUp questions List
         public static void SetFollowUpQuestions(List<int> followUpQuestions)
         {
             HttpContext.Current.Session[FollowUp] = followUpQuestions;
         }
 
+        //Get followUp questions List
         public static List<int> GetFollowUpQuestions()
         { 
             return (List<int>)HttpContext.Current.Session[FollowUp];

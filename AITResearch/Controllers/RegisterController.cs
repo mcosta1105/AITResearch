@@ -14,9 +14,11 @@ namespace AITResearch.Controllers
             return View();
         }
 
+        
         [HttpPost]
         public ActionResult Register(RegisterFormViewModel model)
         {
+            //View model validation for register form
             if (ModelState.IsValid)
             {
                 var respondent = new Respondent
@@ -30,17 +32,21 @@ namespace AITResearch.Controllers
 
                 };
 
+                //Store respondent in Session
                 AppSession.SetRespondent(respondent);
 
+                //Send respondent to Survey
                 return RedirectToAction("Survey", "Survey");
             }
 
-
+            //If form invalid return respondent to register form
             return View();
         }
 
+        //Action to perform survey as anonymous respondent
         public ActionResult Anonymous()
         {
+            //Get respondent details (ip and date)
             Respondent respondent = new Respondent
             {
                 Date = DateTime.Now.Date,
@@ -49,8 +55,10 @@ namespace AITResearch.Controllers
                 LastName = "Anonymous"
             };
 
+            //Store respondent in Session as anonymous
             AppSession.SetRespondent(respondent);
 
+            //Send respondent to survey
             return RedirectToAction("Survey", "Survey");
         }
 

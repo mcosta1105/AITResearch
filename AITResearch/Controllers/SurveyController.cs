@@ -9,17 +9,20 @@ namespace AITResearch.Controllers
 {
     public class SurveyController : Controller
     {
-        // GET: Survey
+        
 
+        //Declare DB Context
         private AitrDbContext _context;
         
 
         //Constructor
         public SurveyController()
         {
+            //Instantiate DB Context
             _context = new AitrDbContext();
         }
 
+        // GET: Survey
         [HttpGet]
         public ActionResult Survey()
         {
@@ -30,14 +33,14 @@ namespace AITResearch.Controllers
             if (AppSession.GetFollowUpQuestions() == null || AppSession.GetFollowUpQuestions().Count() == 0)
             {
                 //Return question by Order
-                //viewModel.Question = GetQuestionByOrder(8);
-
                 if(IsQuestionAvailable(AppSession.GetQuestionNumber()))
                 {
+                    //If questions have not finished
                     viewModel.Question = GetQuestionByOrder(AppSession.GetQuestionNumber());
                 }
                 else
                 {
+                    //All questions are done, call FinishSurvey Action
                     FinishSurvey();
                     return RedirectToAction("Finish", "Finish");
                 }
@@ -56,29 +59,39 @@ namespace AITResearch.Controllers
         }
 
         
+        //Post method to take respondent to next question and store current question in Session
         [HttpPost]
         public ActionResult Survey(SurveyViewModel model)
         {   
+            //Set question ID in answer from view model
             var answer = new Answer
             {
                 Question_QID = model.Answer.Question_QID                
             };
+
+            
             if (model.Type == "checkbox")
             {
+                //Loop through checkbox answers
                 foreach (var option in model.CheckBoxAnswers)
                 {
+                    //Option selected
                     if (option.IsSelected)
                     {
+                        //Store option in Session
                         answer.Option_OID = option.Id;
                         AppSession.AddAnswer(answer);
                         if (option.NextQuestion != null)
                         {
+                            //Add followUp question 
                             AppSession.AddFollowUpQuestion(option.NextQuestion.Value);
                         }
                     }
                 }
+
                 if (AppSession.GetFollowUpQuestions() == null || AppSession.GetFollowUpQuestions().Count() == 0)
                 {
+                    //No option selected,  increment questin order
                     AppSession.IncrementQuestionNumber();
                     return RedirectToAction("Survey");
                 }
@@ -96,16 +109,11 @@ namespace AITResearch.Controllers
                     //Answered
                     answer.Option_OID = model.Answer.Option_OID;
                     answer.Text = model.Answer.Text;
+                    //Store in Session
                     AppSession.IncrementQuestionNumber();
                     AppSession.AddAnswer(answer);
                 }
             }
-
-
-
-
-
-
 
 
             return RedirectToAction("Survey");
@@ -113,7 +121,7 @@ namespace AITResearch.Controllers
 
 
 
-
+        //Get question by ID from DB
         public Question GetQuestionById(int id)
         {
             var question = _context.Questions.Single(q => q.QID == id);
@@ -123,6 +131,7 @@ namespace AITResearch.Controllers
             return question;
         }
 
+        //Get quesiton by Order from DB
         public Question GetQuestionByOrder(int order)
         {
             var question = _context.Questions.Single(q => q.QuestionOrder == order);
@@ -138,16 +147,19 @@ namespace AITResearch.Controllers
             return _context.Questions.Any(q => q.QuestionOrder == order);
         }
 
+        //Finish Survey method ( respondent and answers from Session and store in DB )
         public void FinishSurvey()
         {
+            //get respondent from Session
             Respondent respondent = AppSession.GetRespondent();
+            //Store respondent in DB
             _context.Respondents.Add(respondent);
             _context.SaveChanges();
 
-
-
+            //Questions answered
             if (AppSession.GetAnswers() != null)
             {
+                //Get answers from Session
                 try
                 {
                     List<Answer> answers = AppSession.GetAnswers();
@@ -157,6 +169,7 @@ namespace AITResearch.Controllers
                         answer.Respondent_RID = respondent.RID;
                     }
 
+                    //Store answers in DB
                     _context.Answers.AddRange(answers);
                     _context.SaveChanges();
                 }
@@ -166,6 +179,7 @@ namespace AITResearch.Controllers
                 }
             }
 
+            //Clear Session
             AppSession.ClearSession();
             
         }
