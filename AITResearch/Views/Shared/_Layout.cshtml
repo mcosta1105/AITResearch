@@ -22,8 +22,16 @@
                 </a>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav"></ul>
-                <a href="@Url.Action("Login", "Login")" class="btn btn-primary navbar-right">Login</a>
+                @if (ViewBag.Title == "Home")
+                {
+                    <a href="@Url.Action("Login", "Login")" class="btn btn-primary navbar-right">Log In</a>
+
+                }
+                @if (ViewBag.Title == "Admin")
+                {
+                    <a href="@Url.Action("Logout", "Admin")" class="btn btn-primary navbar-right">Log Out</a>
+
+                }
             </div>
         </div>
     </div>

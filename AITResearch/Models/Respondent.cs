@@ -39,6 +39,6 @@ namespace AITResearch.Models
         public string LastName { get; set; }
 
         //Table relationship
-        public virtual ICollection<Answer> RespondentAnswers { get; set; }
+        public virtual List<Answer> RespondentAnswers { get; set; }
     }
 }

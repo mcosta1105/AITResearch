@@ -10,6 +10,20 @@ namespace AITResearch
         const string FollowUp = "FollowUp";
         const string Respondent = "Respondent";
         const string Answers = "Answer";
+        const string SearchList = "SearchList";
+
+
+        //Set search list
+        public static void SetSearchList(List<int> searchList)
+        {
+            HttpContext.Current.Session[SearchList] = searchList;
+        }
+
+        //Get search list
+        public static List<int> GetSearchList()
+        {
+            return (List<int>)HttpContext.Current.Session[SearchList];
+        }
 
 
         //Get question by order number
@@ -102,7 +116,6 @@ namespace AITResearch
             answers.Add(answer);
             SetAnswers(answers);
         }
-
 
 
         //Cleans Session

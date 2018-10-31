@@ -16,6 +16,7 @@ namespace AITResearch.Controllers
 
         
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterFormViewModel model)
         {
             //View model validation for register form

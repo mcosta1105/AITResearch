@@ -2,69 +2,57 @@
 @{
     ViewBag.Title = "Admin";
 
-    List<SelectListItem> li = new List<SelectListItem>();
-    li.Add(new SelectListItem() { Text = "Item 1", Value = "Item 1" });
-    li.Add(new SelectListItem() { Text = "Item 2", Value = "Item 2" });
-    li.Add(new SelectListItem() { Text = "Item 3", Value = "Item 3" });
 }
 
 
 
 
 <div class="container admin">
-    <div class="row">
-        <div class="col-md-2">
-            @Html.DropDownList("Item List", li, "Select", new { @class = "form-control" })
-        </div>
-        <div class="col-md-2">
-            <button class="btn btn-default">Filter</button>
-        </div>
-        <div class="col-md-6">
-            @Html.TextBoxFor(m => m.SearchInput, new { @class = "form-control", @placeholder = "Search..." })
-        </div>
-        <div class="col-md-2">
-            <button class="btn btn-default">Search</button>
-        </div>
-    </div>
 
+    <form method="post">
+        @Html.AntiForgeryToken()
+
+        <div class="form-group row">
+            <div class="col-md-4 col-md-offset-3">
+                @Html.TextBoxFor(m => m.SearchInput, new { @class = "form-control", @placeholder = "Search..." })
+                @Html.ValidationMessageFor(m => m.SearchInput, null, new { @class = "text-danger" })
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-default">Search</button>
+            </div>
+        </div>
+        
+    </form>
     <div class="row">
         <table class="table">
             <thead>
                 <tr>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
                     <th>Email</th>
                     <th>Gender</th>
                     <th>Phone</th>
-                    <th>Age</th>
+                    <th>Age Range</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>john@example.com</td>
-                    <td>Male</td>
-                    <td>0410123456</td>
-                    <td>25</td>
-                </tr>
-                <tr>
-                    <td>Mary</td>
-                    <td>Moe</td>
-                    <td>mary@example.com</td>
-                    <td>Female</td>
-                    <td>0410123456</td>
-                    <td>30</td>
-                </tr>
-                <tr>
-                    <td>July</td>
-                    <td>Dooley</td>
-                    <td>july@example.com</td>
-                    <td>Female</td>
-                    <td>0410123456</td>
-                    <td>21</td>
-                </tr>
-            </tbody>
+            @foreach (var respondent in Model.Respondents)
+            {
+                <tbody>
+                    <tr>
+                        <td>@respondent.FirstName</td>
+                        <td>@respondent.LastName</td>
+                        <td>@respondent.Email</td>
+                        <td>@respondent.Gender</td>
+                        <td>@respondent.Phone</td>
+                        <td>@respondent.AgeRange</td>
+                    </tr>
+                </tbody>
+            }
         </table>
-    </div>   
+    </div>
 </div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

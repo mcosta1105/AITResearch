@@ -11,6 +11,7 @@
     </div>
     <div class="register-body">
         <form method="post">
+            @Html.AntiForgeryToken()
             <div class="form-group">
                 @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control center", @placeholder = "First Name" })
                 <div class="text-center">

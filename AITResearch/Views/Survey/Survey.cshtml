@@ -5,6 +5,7 @@
 }
 <div class="container question">
     <form method="post">
+        @Html.AntiForgeryToken()
         <div class="question-title">
             <div class="white-txt form-group">
                 <h3>@Model.Question.Text</h3>

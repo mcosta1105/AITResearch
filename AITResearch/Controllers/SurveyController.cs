@@ -20,6 +20,7 @@ namespace AITResearch.Controllers
         {
             //Instantiate DB Context
             _context = new AitrDbContext();
+
         }
 
         // GET: Survey
@@ -61,6 +62,7 @@ namespace AITResearch.Controllers
         
         //Post method to take respondent to next question and store current question in Session
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Survey(SurveyViewModel model)
         {   
 
@@ -149,10 +151,11 @@ namespace AITResearch.Controllers
         public Question GetQuestionByOrder(int order)
         {
             try
-            {
+            {   
                 var question = _context.Questions.Single(q => q.QuestionOrder == order);
                 question.Options = _context.Options.Where(o => o.Question_QID == question.QID).ToList();
                 question.Type = _context.Types.Single(t => t.TID == question.Type_TID);
+
                 return question;
             }
             catch (Exception e)
